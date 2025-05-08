@@ -111,7 +111,7 @@ public:
         
         // gets next loc
         HASH_INDEX_T offsetProbe = this->numProbes_ * dhstep_;
-        HASH_INDEX_T posProbe = (this->start_ + offset) % this->m_;
+        HASH_INDEX_T posProbe = (this->start_ + offsetProbe) % this->m_;
 
 
         // next probe
@@ -398,7 +398,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::remove(const KeyType& key)
     HASH_INDEX_T keyLoc = probe(key);
     
     if (keyLoc != npos) {
-        HashItem* spot = table_[index];
+        HashItem* spot = table_[keyLoc];
         // hasnt been deleted yet
         if (spot != nullptr && spot->deleted == false) {
             spot->deleted = true;
