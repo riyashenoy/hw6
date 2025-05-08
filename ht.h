@@ -365,6 +365,10 @@ void HashTable<K,V,Prober,Hash,KEqual>::insert(const ItemType& p)
     // probing, get pos
     HASH_INDEX_T pos = probe(p.first);
 
+    if (pos == npos) {
+        throw std::logic_error("nothing free");
+    }
+
     // pointer to curent spot
     HashItem* current = table_[pos];
 
