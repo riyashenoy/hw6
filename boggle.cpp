@@ -95,5 +95,38 @@ bool boggleHelper(const std::set<std::string>& dict, const std::set<std::string>
 								   std::string word, std::set<std::string>& result, unsigned int r, unsigned int c, int dr, int dc)
 {
 //add your solution here!
+    
+	// dont go off the board
+	if (r >= board.size() || c >= board[0].size()) {
+		return false;
+	}
 
+    // make new word 
+    std::string current = word + board[r][c];
+
+    // check if its word
+    bool checkWord = dict.count(current) > 0;
+
+	// check if prefix
+    bool checkPrefix = prefix.count(current) > 0;
+
+    // check 
+    if (!checkPrefix) {
+        if (checkWord) {
+            result.insert(current);
+            return true;
+        }
+        return false;
+    }
+
+    // explorenext cell in same dir
+    bool exploreNext = boggleHelper(dict, prefix, board, current, result, r + dr, c + dc, dr, dc);
+
+    //current word compelte but no further long 
+    if (!exploreNext  && checkWord) {
+        result.insert(current);
+        return true;
+    }
+
+    return exploreNext ;
 }
