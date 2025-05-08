@@ -481,7 +481,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
 {
 
     // throw statement
-    if (mIndex_ >= sizeof(CAPACITIES)/sizeof(HASH_INDEX_T) - 1) {
+    if (mIndex_ + 1 >= sizeof(CAPACITIES)/sizeof(HASH_INDEX_T)) {
         throw std::logic_error("out of space");
     }
     
