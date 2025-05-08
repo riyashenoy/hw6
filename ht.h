@@ -480,6 +480,11 @@ template<typename K, typename V, typename Prober, typename Hash, typename KEqual
 void HashTable<K,V,Prober,Hash,KEqual>::resize()
 {
 
+    // throw statement
+    if (mIndex_ >= sizeof(CAPACITIES)/sizeof(HASH_INDEX_T) - 1) {
+        throw std::logic_error("out of space");
+    }
+    
     // next size 
     mIndex_ = mIndex_ + 1;
     HASH_INDEX_T newSize = CAPACITIES[mIndex_];
