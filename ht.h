@@ -486,7 +486,7 @@ void HashTable<K,V,Prober,Hash,KEqual>::resize()
     }
     
     // next size 
-    mIndex_ = mIndex_ + 1;
+    mIndex_++;
     HASH_INDEX_T newSize = CAPACITIES[mIndex_];
 
     // store table for reinsertion
